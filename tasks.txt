@@ -1,0 +1,7 @@
+Go to school/Monday
+Go to school/Tuesday
+Go to school/Wednesday
+Go to school/Thursday
+Go to school/Friday
+Go to school/Saturday
+Go to school/Sunday

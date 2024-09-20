@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"> 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device_width, initial_scale=1.0">
+    <title>My To Do List</title> 
+</head>
+<body>
+    <h1>To Do List</h1> <!--Τυπική χρήση html για τη βασική δημιουργία σελίδας, τίτλου, επικεφαλίδας, διαστάσεων.-->
+    <form action="/add_tasks" method="POST">
+        <input type="text" name="task" placeholder="Insert a new task" required>
+        <select name="day" required> <!--Δημιουργία χώρου input για να γράψει ο χρήστης το task που θέλει να προσθέσει-->
+            <option value="">Choose a day to view tasks on</option>
+            {% for day in days %}
+            <option value+"{{day}}">{{day}}</option>
+            {% endfor %}
+        </select> <!--Button επιλογής της ημέρας που θέλει να προσθέσει task, το chatgpt έδωσε το {{day}}, έμαθα δηλαδή από εκεί τη διασύνδεση του κλειδιού της λίστας με τις επιλογές του button-->
+        <button type="submit">Add my new task</button>  <!--Submit button, ολοκληρώνει τη διαδικασία τοποθέτησης νέου task-->  
+    </form>
+    
+    {% for day, tasks in tasks_in_day.items() %} <!--Συντακτικό Jinja2. Ουσιαστικά υλοποιεί 2 loops ανάμεσα σε days-tasks και έπειτα tasks για την παρουσιασή τους και τοποθετεί το delete button. Σίγουρα το πιο δύσκολο κομμάτι του κώδικα, κι εδώ χρειάστηκε chatgpt-->
+        <h2>{{day}}</h2>
+        <ul>
+            {% for task in tasks %}
+                <li>
+                    {{task}}
+                    <a href="/delete_tasks/{{day}}/{{loop.index0}}">Delete</a>
+
+                </li>
+            {% else %}
+                <li>Sorry, no tasks for {{day}} can be found</li>
+            {% endfor %}
+        </ul>
+    {% endfor %}
+</body>
+</html>
+<!--Tα prompts που χρησιμοποιήθηκαν στο ChatGpt αναλυτικά στην έκθεση-->
